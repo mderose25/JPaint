@@ -9,11 +9,11 @@ import view.gui.PaintCanvas;
 
 public class ShapeList extends ArrayList<IShape> {
 
-		public void push(IShape shape, PaintCanvas canvas, Point start, Point end){
+		public void push(IShape shape, PaintCanvas canvas){
 			if(shape == null) throw new IllegalArgumentException();
 			this.add(shape);		
 			ShapeListener listener = new ShapeListener(shape);
-			listener.update(canvas, start, end);
+			listener.update(canvas);
 		}
 		
 		public IShape pop(){

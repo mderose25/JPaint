@@ -28,9 +28,9 @@ class Command implements ICommand {
 	}
 	
 	@Override
-	public void run() throws IOException {
+	public void run() throws IOException {	
 			IShape newShape = ShapeFactory.createShape(shape, start, end);
-			shapeList.push(newShape, canvas, start, end);
+			shapeList.push(newShape, canvas);
 	}
 
 }
