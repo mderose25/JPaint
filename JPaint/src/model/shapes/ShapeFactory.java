@@ -5,23 +5,25 @@ import model.persistence.ApplicationState;
 import model.*;
 
 public class ShapeFactory {
+	ApplicationState state; 
 	
 		private ShapeFactory(){};
 		
-		public static IShape createShape(ShapeType shapeType, Point start, Point end){
+		public static IShape createShape(Point start, Point end, ApplicationState state){
 			IShape shape = null;
+			ShapeType shapeType = state.getActiveShapeType();
 			
 				switch(shapeType){
 				case ELLIPSE:
-					shape = new Ellipse(start, end);	
+					shape = new Ellipse(start, end, state);	
 					return shape; 
 				
 				case RECTANGLE:
-					shape = new Rectangle(start, end); 
+					shape = new Rectangle(start, end, state); 
 					return shape;
 					
 				case TRIANGLE:
-					shape = new Triangle(start, end); 	
+					shape = new Triangle(start, end, state); 	
 					return shape; 
 				}
 				

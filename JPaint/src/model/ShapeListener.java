@@ -15,7 +15,6 @@ public class ShapeListener implements IShapeListener {
 	@Override
 	public void update(PaintCanvas canvas) {
 		Graphics2D g2 = canvas.getGraphics2D();
-
 		shape.draw(g2);
 	}
 
