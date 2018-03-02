@@ -1,20 +1,22 @@
 package model;
 
+import model.interfaces.ISingleton;
+import model.shapes.ShapeList;
 import model.interfaces.IShape;
 import model.interfaces.ISingleton;
 import model.shapes.ShapeList;
 import view.gui.PaintCanvas;
 
-public class SelectSingleton implements ISingleton {
+public class CopySingleton implements ISingleton {
 
-	private static SelectSingleton firstInstance = null;
+	private static CopySingleton firstInstance = null;
 	
-	private SelectSingleton(){}
+	private CopySingleton(){}
 	ShapeList shapeList = new ShapeList();
 	
-	public static SelectSingleton getInstance(){
+	public static CopySingleton getInstance(){
 		if(firstInstance == null){
-			firstInstance = new SelectSingleton();
+			firstInstance = new CopySingleton();
 		}
 		
 		return firstInstance; 
@@ -27,5 +29,10 @@ public class SelectSingleton implements ISingleton {
 	public IShape getShape(int i){
 		return firstInstance.shapeList.get(i);
 	}
+	
+	public void clearCopied(ShapeList list){
+		list.clear();
+	}
 
 }
+

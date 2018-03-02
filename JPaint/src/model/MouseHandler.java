@@ -3,7 +3,10 @@ package model;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+
+import model.interfaces.IShape;
 import model.persistence.ApplicationState;
+import model.shapes.ShapeList;
 import view.gui.PaintCanvas;
 
 public class MouseHandler extends MouseAdapter {
@@ -15,16 +18,13 @@ public class MouseHandler extends MouseAdapter {
 	public MouseHandler(ApplicationState state, PaintCanvas canvas) {
 		this.state = state;
 		this.canvas = canvas;
-
 	}
 
 	public void mousePressed(MouseEvent e) {
 		int a = e.getX();
 		int b = e.getY();
 		x = new Point(a, b);
-		
-		//Place stateActiveetc for MOVE. once pressed it will take the shapes
-		//from my select singleton and move them to the point pressed
+	
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -34,22 +34,29 @@ public class MouseHandler extends MouseAdapter {
 
 		if (state.getActiveStartAndEndPointMode().equals(StartAndEndPointMode.DRAW)) {
 			DrawCommand draw = new DrawCommand(state, canvas, x, y);
-
 			try {
 				draw.run();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
-		
-		if (state.getActiveStartAndEndPointMode().equals(StartAndEndPointMode.SELECT)){
+
+		if (state.getActiveStartAndEndPointMode().equals(StartAndEndPointMode.SELECT)) {
 			SelectCommand select = new SelectCommand(state, canvas, x, y);
-			
 			try {
 				select.run();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+		}
+		
+		if (state.getActiveStartAndEndPointMode().equals(StartAndEndPointMode.MOVE)) {
+			MoveCommand move = new MoveCommand(state, canvas, x, y);
+			try {
+				move.run();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}	
 		}
 	}
 }

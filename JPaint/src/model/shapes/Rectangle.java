@@ -8,6 +8,7 @@ import model.ShapeColor;
 import model.ShapeShadingType;
 import model.interfaces.IShape;
 import model.persistence.ApplicationState;
+import view.gui.PaintCanvas;
 
 public class Rectangle implements IShape {
 	Point start, end;
@@ -22,14 +23,16 @@ public class Rectangle implements IShape {
 		primColor = state.getActivePrimaryColor();
 		secColor = state.getActiveSecondaryColor();
 		shade = state.getActiveShapeShadingType();
-		minX = Math.min(start.x, end.x); minY = Math.min(start.y, end.y);
-		maxX = Math.max(start.x, end.x); maxY = Math.max(start.y, end.y);
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
 		colorOne = ColorFactory.retrieveColor(primColor);
 		colorTwo = ColorFactory.retrieveColor(secColor);
+		minX = Math.min(start.x, end.x); 
+		minY = Math.min(start.y, end.y);
+		maxX = Math.max(start.x, end.x); 
+		maxY = Math.max(start.y, end.y);
 		
 		if (maxX - minX > 0 && maxY - minY > 0) {
 			if (shade.equals(shade.FILLED_IN)) {
@@ -49,8 +52,8 @@ public class Rectangle implements IShape {
 				g.fillRect(minX, minY, maxX - minX, maxY - minY);
 				g.setColor(colorTwo);
 			}
-
 			g.drawRect(minX, minY, maxX - minX, maxY - minY);
+			
 		}
 	}
 
@@ -65,17 +68,29 @@ public class Rectangle implements IShape {
 	}
 
 	@Override
+	public void setStart(Point start) {
+		this.start = start;
+	}
+
+	@Override
+	public void setEnd(Point end) {
+		this.end = end;
+	}
+
+	
+	@Override
 	public boolean contains(Point clickStart, Point shapeStart, Point shapeEnd) {
 		return(clickStart.x <= maxX) && (clickStart.x >= minX) &&
 				(clickStart.y >= minY) &&(clickStart.y <= maxY);
 	}
 	
 	@Override
-	public boolean equals(IShape other) {
-	    if (other instanceof Rectangle) {
-	        return true;
-	    }
-		return false;
+	public boolean dragContains(Point clickStart, Point clickEnd, Point shapeStart, Point shapeEnd){
+		return(clickStart.x >= maxX) && (clickStart.x <= minX) &&
+				(clickStart.y <= minY) &&(clickStart.y >= maxY) &&
+				(clickEnd.x >= maxX) && (clickEnd.x <= minX) &&
+				(clickEnd.y <= minY) &&(clickEnd.y >= maxY);
 	}
 
+	
 }

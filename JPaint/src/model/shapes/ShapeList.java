@@ -2,18 +2,18 @@ package model.shapes;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.List;
 import model.*;
 import model.interfaces.IShape;
+import model.persistence.ApplicationState;
 import view.gui.PaintCanvas;
 
 public class ShapeList extends ArrayList<IShape> {
+	ShapeListener listener = new ShapeListener();
 	
-		public void push(IShape shape, PaintCanvas canvas){
+		public void push(IShape shape, PaintCanvas canvas, ApplicationState state){
 			if(shape == null) throw new IllegalArgumentException();
 			this.add(shape);		
-			ShapeListener listener = new ShapeListener(shape);
-			listener.update(canvas);
+			listener.update(canvas, this);
 		}
 		
 		public IShape pop(){

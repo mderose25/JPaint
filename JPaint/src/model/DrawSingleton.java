@@ -23,12 +23,8 @@ public class DrawSingleton implements ISingleton {
 		return firstInstance.shapeList;
 	}
 	
-	public IShape removeShape(){
-		return firstInstance.shapeList.pop();
-	}
-	
-	public void addShape(IShape shape, PaintCanvas canvas){
-		firstInstance.shapeList.push(shape, canvas);
+	public void removeShape(IShape i){
+		firstInstance.shapeList.remove(i);
 	}
 	
 }

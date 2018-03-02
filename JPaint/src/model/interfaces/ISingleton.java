@@ -6,5 +6,4 @@ import view.gui.PaintCanvas;
 
 public interface ISingleton {
 	public ShapeList getList();
-	public IShape removeShape();
 }
