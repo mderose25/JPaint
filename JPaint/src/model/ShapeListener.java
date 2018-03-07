@@ -24,7 +24,6 @@ public class ShapeListener implements IShapeListener {
 			shape.draw(g);
 		}
 
-		
 	}
 
 }

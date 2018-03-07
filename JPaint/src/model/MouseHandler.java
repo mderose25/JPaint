@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
+import model.interfaces.IApplicationState;
 import model.interfaces.IShape;
 import model.persistence.ApplicationState;
 import model.shapes.ShapeList;
@@ -11,11 +12,11 @@ import view.gui.PaintCanvas;
 
 public class MouseHandler extends MouseAdapter {
 	PaintCanvas canvas;
-	ApplicationState state = null;
+	IApplicationState state = null;
 	Point x;
 	Point y;
 
-	public MouseHandler(ApplicationState state, PaintCanvas canvas) {
+	public MouseHandler(IApplicationState state, PaintCanvas canvas) {
 		this.state = state;
 		this.canvas = canvas;
 	}

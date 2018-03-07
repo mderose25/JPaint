@@ -1,15 +1,16 @@
 package model.shapes;
 
+import model.interfaces.IApplicationState;
 import model.interfaces.IShape;
 import model.persistence.ApplicationState;
 import model.*;
 
 public class ShapeFactory {
-	ApplicationState state; 
+	IApplicationState state; 
 	
 		private ShapeFactory(){};
 		
-		public static IShape createShape(Point start, Point end, ApplicationState state){
+		public static IShape createShape(Point start, Point end, IApplicationState state){
 			IShape shape = null;
 			ShapeType shapeType = state.getActiveShapeType();
 			

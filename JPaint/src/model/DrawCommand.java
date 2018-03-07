@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 
+import model.interfaces.IApplicationState;
 import model.interfaces.ICommand;
 import model.interfaces.IShape;
 import model.interfaces.IUndoable;
@@ -11,13 +12,13 @@ import view.gui.PaintCanvas;
 
 class DrawCommand implements ICommand, IUndoable {
 	PaintCanvas canvas;
-	ApplicationState state;
+	IApplicationState state;
 	Point start;
 	Point end; 
 	IShape newShape;
 	DrawSingleton drawInstanceOne;
 
-	public DrawCommand(ApplicationState state, PaintCanvas canvas, Point start, Point end){
+	public DrawCommand(IApplicationState state, PaintCanvas canvas, Point start, Point end){
 		this.state = state;
 		this.canvas = canvas;
 		this.start = start;
@@ -28,7 +29,7 @@ class DrawCommand implements ICommand, IUndoable {
 	@Override
 	public void run() throws IOException {	
 			drawInstanceOne = DrawSingleton.getInstance();
-			drawInstanceOne.shapeList.push(newShape, canvas, state);
+			drawInstanceOne.shapeList.push(newShape, canvas);
 			CommandHistory.add(this);
 	}
 

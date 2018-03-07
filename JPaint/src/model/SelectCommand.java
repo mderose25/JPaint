@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import model.interfaces.IApplicationState;
 import model.interfaces.ICommand;
 import model.interfaces.IShape;
 import model.interfaces.IUndoable;
@@ -12,7 +13,7 @@ import view.gui.PaintCanvas;
 
 class SelectCommand implements ICommand, IUndoable {
 	PaintCanvas canvas;
-	ApplicationState state;
+	IApplicationState state;
 	Point start;
 	Point end;
 	ArrayList<IShape> listSelect;
@@ -20,7 +21,7 @@ class SelectCommand implements ICommand, IUndoable {
 	ShapeList currentList = new ShapeList();
 	ShapeList selectedList = new ShapeList();
 
-	public SelectCommand(ApplicationState state, PaintCanvas canvas, Point start, Point end) {
+	public SelectCommand(IApplicationState state, PaintCanvas canvas, Point start, Point end) {
 		this.state = state;
 		this.canvas = canvas;
 		this.start = start;

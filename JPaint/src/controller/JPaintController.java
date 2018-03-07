@@ -9,15 +9,18 @@ import model.RedoCommand;
 import model.UndoCommand;
 import model.interfaces.IApplicationState;
 import view.EventName;
+import view.gui.PaintCanvas;
 import view.interfaces.IUiModule;
 
 public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
     private final IApplicationState applicationState;
+    private final PaintCanvas canvas; 
 
-    public JPaintController(IUiModule uiModule, IApplicationState applicationState) {
+    public JPaintController(IUiModule uiModule, IApplicationState applicationState, PaintCanvas canvas) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
+        this.canvas = canvas; 
     }
 
     @Override
@@ -30,7 +33,6 @@ public class JPaintController implements IJPaintController {
     		PasteCommand pasteCommand = new PasteCommand();
     		RedoCommand redoCommand = new RedoCommand();
     		UndoCommand undoCommand = new UndoCommand();
-    		DeleteCommand deleteCommand = new DeleteCommand();
     		
         uiModule.addEvent(EventName.CHOOSE_SHAPE, () -> applicationState.setActiveShape());
         uiModule.addEvent(EventName.CHOOSE_PRIMARY_COLOR, () -> applicationState.setActivePrimaryColor());
@@ -72,7 +74,8 @@ public class JPaintController implements IJPaintController {
         
         uiModule.addEvent(EventName.DELETE, () -> {
 			try {
-				deleteCommand.run();
+				DeleteCommand delete = new DeleteCommand(canvas, applicationState);
+				delete.run();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

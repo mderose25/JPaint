@@ -21,7 +21,7 @@ public class Main {
         KeyListener keyListener = new KeyListener(paintCanvas);
    		paintCanvas.addMouseListener(handler);
    		paintCanvas.addKeyListener(keyListener);
-        IJPaintController controller = new JPaintController(uiModule, appState);
+        IJPaintController controller = new JPaintController(uiModule, appState, paintCanvas);
         controller.setup();
     }
 }

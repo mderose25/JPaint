@@ -10,7 +10,7 @@ import view.gui.PaintCanvas;
 public class ShapeList extends ArrayList<IShape> {
 	ShapeListener listener = new ShapeListener();
 	
-		public void push(IShape shape, PaintCanvas canvas, ApplicationState state){
+		public void push(IShape shape, PaintCanvas canvas){
 			if(shape == null) throw new IllegalArgumentException();
 			this.add(shape);		
 			listener.update(canvas, this);

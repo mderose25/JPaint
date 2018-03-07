@@ -7,6 +7,7 @@ import model.Point;
 import model.ShapeColor;
 import model.ShapeShadingType;
 import model.StartAndEndPointMode;
+import model.interfaces.IApplicationState;
 import model.interfaces.IShape;
 import model.persistence.ApplicationState;
 import view.gui.PaintCanvas;
@@ -19,11 +20,11 @@ class Ellipse implements IShape {
 	Color colorOne, colorTwo;
 	int minX, minY, maxX, maxY;
 	
-	public Ellipse(Point start, Point end, ApplicationState state) {
+	public Ellipse(Point start, Point end, IApplicationState state2) {
 		this.start = start; this.end = end;
-		primColor = state.getActivePrimaryColor();
-		secColor = state.getActiveSecondaryColor();
-		shade = state.getActiveShapeShadingType();
+		primColor = state2.getActivePrimaryColor();
+		secColor = state2.getActiveSecondaryColor();
+		shade = state2.getActiveShapeShadingType();
 	}
 
 	public void draw(Graphics2D g) {
